@@ -94,22 +94,22 @@ export function Navbar() {
           >
             <nav className="flex flex-col gap-1 px-6 py-6">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className="border-b border-hairline py-4 font-display text-2xl text-ink cursor-pointer"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <a
+              <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
                 className="mt-5 bg-plum-800 px-5 py-3.5 text-center font-label text-xs text-paper cursor-pointer"
               >
                 What&rsquo;s Your Next Move?
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

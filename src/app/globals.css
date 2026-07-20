@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --paper: #f8f6f1;
+  --paper-2: #f1ecdf;
+  --paper-3: #e8e0cc;
+  --ink: #180f2b;
+  --ink-soft: #372a53;
+  --plum-950: #140a26;
+  --plum-900: #1e1038;
+  --plum-800: #2b1750;
+  --plum-700: #3c2170;
+  --plum-600: #4f2c92;
+  --plum-500: #6a3fb8;
+  --lime: #a7cf3a;
+  --lime-bright: #c3e838;
+  --lime-deep: #7ea329;
+  --hairline: rgba(24, 15, 43, 0.12);
+  --hairline-dark: rgba(248, 246, 241, 0.14);
+  --gold-foil: #b89a5a;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-plum-950: var(--plum-950);
+  --color-plum-900: var(--plum-900);
+  --color-plum-800: var(--plum-800);
+  --color-plum-700: var(--plum-700);
+  --color-plum-600: var(--plum-600);
+  --color-plum-500: var(--plum-500);
+  --color-lime: var(--lime);
+  --color-lime-bright: var(--lime-bright);
+  --color-lime-deep: var(--lime-deep);
+  --color-gold-foil: var(--gold-foil);
+
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  --animate-drift: drift 22s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+* {
+  border-color: var(--hairline);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.font-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Paper grain for light sections */
+.bg-grain {
+  position: relative;
+}
+
+.bg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Route-dossier grid for dark sections */
+.bg-dossier {
+  background-color: var(--plum-950);
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--hairline-dark) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Leaflet overrides for brand-tinted map */
+.pp-map .leaflet-tile-pane {
+  filter: grayscale(1) invert(1) contrast(0.9) brightness(0.95) hue-rotate(235deg) saturate(1.4);
+}
+
+.pp-map .leaflet-control-zoom a {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--hairline) !important;
+}
+
+.pp-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--paper) 85%, transparent) !important;
+  font-size: 10px !important;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-2%, 2%);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--plum-950);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
